@@ -14,6 +14,12 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    struct Puzzle{
+        QPixmap piece;
+        int index;
+        int place;
+        int rotation;
+    };
 
 private slots:
 
