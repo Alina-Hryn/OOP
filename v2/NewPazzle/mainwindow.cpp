@@ -29,13 +29,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     for(int i=1;i<=N;i++){
             for(int j=1;j<=N;j++){
-                QLabel *label =  new QLabel();
+                //QLabel *label =  new QLabel();
                 Puzzle result;
                 result.index=(i-1)*N+j;
                 result.place=places[(i-1)*N+j-1];
                 QRect rect((j-1)*1000/N, (i-1)*1000/N, 1000/N, 1000/N);
                 QPixmap cropped = pixmap.copy(rect);
-                cropped = cropped.scaled(1000/N, 1000/N, Qt::IgnoreAspectRatio);
+                cropped = cropped.scaled(1000/N/2, 1000/N/2, Qt::IgnoreAspectRatio);
                 result.piece=cropped;
                 puzzle.push_back(result);
                             //QPainter p;
@@ -45,31 +45,28 @@ MainWindow::MainWindow(QWidget *parent) :
                             //p.translate(-center);
 
                 //label->setPixmap(result.piece);
-                label->setText(QString(" %1 ").arg(puzzle[(i-1)*N+j-1].place));
-                ui->gridLayout->addWidget(label, i, j);
+                /*label->setText(QString(" %1 ").arg(puzzle[(i-1)*N+j-1].place));
+                ui->gridLayout->addWidget(label, i, j);*/
 
             }
+    }
+
             //вектор пазлів по порядку
-           /* std::sort(puzzle.begin(), puzzle.end(), [](const Puzzle& a, const Puzzle& b) -> bool
+            std::sort(puzzle.begin(), puzzle.end(), [](const Puzzle& a, const Puzzle& b) -> bool
                  {
                      return a.place < b.place;
-                 });*/
+                 });
+
 
              for(int i=1;i<=N;i++){
                      for(int j=1;j<=N;j++){
                          QLabel *label =  new QLabel();
-                         //label->setPixmap(puzzle[(i-1)*N+j-1].piece);
-                         label->setText(QString(" %1 ").arg(puzzle[(i-1)*N+j-1].place));
+                         label->setPixmap(puzzle[(i-1)*N+j-1].piece);
+                         //label->setText(QString(" %1 ").arg(puzzle[(i-1)*N+j-1].place));
                          ui->gridLayout->addWidget(label, i, j);
 
                      }
                      }
-
-
-
-
-
-    }
 }
 
 MainWindow::~MainWindow()
