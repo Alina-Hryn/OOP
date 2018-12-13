@@ -26,13 +26,20 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    initial.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    initial.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    initial.ui
+
+LIBS += C:/opencv/build/x86/vc9/lib/opencv_calib3d240.lib
+LIBS += C:/opencv/build/x86/vc9/lib/opencv_contrib240.lib
+
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
