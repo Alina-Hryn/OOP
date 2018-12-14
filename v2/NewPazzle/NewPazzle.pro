@@ -27,18 +27,16 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    initial.cpp
+    clickablelabel.cpp
 
 HEADERS += \
         mainwindow.h \
-    initial.h
-
+    clickablelabel.h
 FORMS += \
-        mainwindow.ui \
-    initial.ui
+        mainwindow.ui
 
-LIBS += C:/opencv/build/x86/vc9/lib/opencv_calib3d240.lib
-LIBS += C:/opencv/build/x86/vc9/lib/opencv_contrib240.lib
+#LIBS += C:/opencv/build/x86/vc9/lib/opencv_calib3d240.lib
+#LIBS += C:/opencv/build/x86/vc9/lib/opencv_contrib240.lib
 
 
 # Default rules for deployment.
