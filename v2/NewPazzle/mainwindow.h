@@ -30,7 +30,6 @@ private slots:
     void pic_clicked();
 
 
-
 private:
     Ui::MainWindow *ui;
 };

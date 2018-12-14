@@ -9,7 +9,7 @@
 #include <QDebug>
 #include <QMouseEvent>
 
-//QVector <Puzzle> puzzle;
+QVector<int> places;
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -18,14 +18,17 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     show();
 
-    QPixmap pixmap(":/rec/image.png");
+    QPixmap pixmap(":/rec/quad_24.jpg");
     pixmap = pixmap.scaled(1000, 1000, Qt::IgnoreAspectRatio);
-
-
+    QPixmap small=pixmap;
+    small = small.scaled(200, 200, Qt::IgnoreAspectRatio);
+    QLabel *label=new QLabel;
+    label->setPixmap(small);
+    ui->gridLayout_3->addWidget(label, 0,0);
     int N = 5;
     QVector <Puzzle> puzzle;
 
-    QVector<int> places;
+   // QVector<int> places;
     for(int i=0;i<N*N;i++){
         places.push_back(i);
     }
@@ -91,7 +94,16 @@ void MainWindow::pic_clicked()
         ui->gridLayout->removeWidget(obj);
         ui->gridLayout->addWidget(picture1, gp.first, gp.second);
         ui->gridLayout->addWidget(obj, gp1.first, gp1.second);
-        //swap(puzzle[gp1.first*N+gp1.second]->place,puzzle[gp.first*N+gp.second]->place);
+        int a;
+       // a=places[gp1.first*N+gp1.second];
+       // places[gp1.first*N+gp1.second]=places[gp.first*N+gp.second];
+       // places[gp.first*N+gp.second]=a;
+        a=0;
+        for(int i=0; i<N*N;i++){
+            if(places[i]==i)
+                a++;
+        }
+
         picture1 = NULL;
     }
 }
@@ -105,6 +117,7 @@ void MainWindow::on_pushButton_clicked()
 {
     hide();
 }
+
 
 
 
