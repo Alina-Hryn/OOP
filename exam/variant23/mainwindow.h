@@ -60,9 +60,10 @@ class Approach{
         typeOfTaskThatCanBeSolved=rand()%NumberOfTypesOfTasks;
         posibility=(rand()%100+1)/100;
         IfCanBeRepeated=rand()%2;
-        WastedTime=0;
+
         attempt=1;
         timeToDo=(rand()%10)/10+rand()%8+1;
+        WastedTime=timeToDo;
         Ifsuccess();
         for(int i=0; i<NumberOfTypesOfTasks;i++){
            IfSameTypesWereSolved.push_back(0);
@@ -79,7 +80,8 @@ public:
         else{
         if(IfCanBeRepeated==1){
             attempt++;
-            timeToDo+=timeToDo;
+            WastedTime+=timeToDo;
+            WastedTime+=(rand()%10)/10;
             Ifsuccess();
 
         }
@@ -97,7 +99,8 @@ public:
         else{
             if(IfCanBeRepeated==1){
                 attempt++;
-                timeToDo+=timeToDo;
+                WastedTime+=timeToDo;
+                WastedTime+=(rand()%10)/10;
                 N++;
                 Ifsuccess();
             }
@@ -117,12 +120,15 @@ public:
         else{
             if(IfSameTypesWereSolved[typeOfTaskThatCanBeSolved]>0){
                 attempt++;
-                timeToDo-=(rand()%10)/10;
+                WastedTime+=timeToDo;
+                WastedTime-=(rand()%10)/10;
                 N--;
                 Ifsuccess();
             }
             else {
-              printf("Can`t be reapeted");
+              ThirdApproach a;
+              a.solve();
+
             }
 
         }
@@ -131,6 +137,50 @@ public:
 };
 
 class FourthApproach: public Approach{
+public:
+    void solve(){
+        if(success==1)
+            IfSameTypesWereSolved[typeOfTaskThatCanBeSolved]++;
+        else{
+            int b=rand()%10;
+            vector<Approach> B;
+            for(int i=0;i<b;i++){
+                Approach piece;
+                piece.TypeOfApproach=rand()%3+1;
+                switch(piece.TypeOfApproach){
+                case 1:
+                   { FirstApproach fa;
+                    fa.create();
+                    fa.solve();
+                    B.push_back(fa);
+                    break;
+                    }
+                case 2:
+                { SecondApproach fa;
+                 fa.create();
+                 fa.solve();
+                 B.push_back(fa);
+                 break;
+                 }
+                case 3:
+                { ThirdApproach fa;
+                 fa.create();
+                 fa.solve();
+                 B.push_back(fa);
+                 break;
+                 }
+
+                }
+
+              }
+
+
+        }
+    }
+
+};
+
+/*class FifthApproach: public Approach{
 public:
     void solve(){
         if(success==1)
@@ -149,6 +199,6 @@ public:
         }
     }
 
-};
+};*/
 
 #endif // MAINWINDOW_H
