@@ -83,6 +83,7 @@ public:
             WastedTime+=timeToDo;
             WastedTime+=(rand()%10)/10;
             Ifsuccess();
+            solve();
 
         }
         else {
@@ -103,6 +104,7 @@ public:
                 WastedTime+=(rand()%10)/10;
                 N++;
                 Ifsuccess();
+                solve();
             }
             else {
               printf("Can`t be reapeted");
@@ -124,6 +126,7 @@ public:
                 WastedTime-=(rand()%10)/10;
                 N--;
                 Ifsuccess();
+                solve();
             }
             else {
               ThirdApproach a;
