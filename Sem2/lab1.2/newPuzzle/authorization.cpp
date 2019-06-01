@@ -17,6 +17,7 @@ authorization::~authorization()
 
 void authorization::on_pushButton_clicked()
 {
+    hide();
     menu1 window;
     window.setModal(true);
     window.exec();

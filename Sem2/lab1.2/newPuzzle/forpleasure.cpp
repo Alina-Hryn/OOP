@@ -1,7 +1,7 @@
 
 #include "forpleasure.h"
 #include "ui_forpleasure.h"
-
+#include "puzzle.h"
 #include <QFileDialog>
 #include <QLabel>
 #include <QPixmap>
@@ -42,3 +42,13 @@ void forPleasure::on_pushButton_clicked()
 
 
 }
+
+void forPleasure::on_pushButton_2_clicked()
+{
+    hide();
+    puzzle window;
+    window.setModal(true);
+    window.exec();
+}
+
+

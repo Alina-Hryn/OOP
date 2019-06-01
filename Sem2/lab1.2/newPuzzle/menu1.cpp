@@ -22,8 +22,8 @@ void menu1::on_pushButton_3_clicked()
 
 void menu1::on_pushButton_2_clicked()
 {
+    hide();
    forPleasure wind;
    wind.setModal(true);
    wind.exec();
-
 }

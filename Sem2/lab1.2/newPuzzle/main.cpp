@@ -1,8 +1,10 @@
 #include "authorization.h"
 #include <QApplication>
 #include <QDialog>
+#include <QString>
+
 int width=2;
-string WayToTheFile;
+QString WayToTheFile;
 int main(int argc, char *argv[])
 {
 

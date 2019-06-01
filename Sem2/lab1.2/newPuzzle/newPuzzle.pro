@@ -29,25 +29,24 @@ SOURCES += \
         authorization.cpp \
     menu1.cpp \
     forpleasure.cpp \
-    authorization.cpp \
-    forpleasure.cpp \
-    main.cpp \
-    menu1.cpp \
-    menuforsingleplayer.cpp
+    puzzle.cpp \
+    clickablelabel.cpp \
+    singleton.cpp
 
 HEADERS += \
         authorization.h \
     menu1.h \
     forpleasure.h \
     authorization.h \
-    forpleasure.h \
-    menu1.h \
-    menuforsingleplayer.h
+    puzzle.h \
+    clickablelabel.h \
+    singleton.h
 
 FORMS += \
         authorization.ui \
     menu1.ui \
-    forpleasure.ui
+    forpleasure.ui \
+    puzzle.ui
 
 DISTFILES += \
     1/1.jpg \
