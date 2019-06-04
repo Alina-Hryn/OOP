@@ -8,6 +8,7 @@ authorization::authorization(QWidget *parent) :
     ui(new Ui::authorization)
 {
     ui->setupUi(this);
+    ui->centralWidget->setStyleSheet( "background-image: url('back.jpg');" );
 }
 
 authorization::~authorization()

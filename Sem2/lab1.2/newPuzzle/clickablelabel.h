@@ -13,6 +13,7 @@ public:
     ~ClickableLabel();
 
     int place;
+    int index;
 
 signals:
     void clicked();
