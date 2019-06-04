@@ -2,11 +2,28 @@
 #define SINGLETON_H
 
 #include<QString>
-class singleton
+#include<QDialog>
+
+
+class Singleton
 {
+
+private:
+   Singleton() {}
+
+
+
 public:
-    singleton();
-    QString way;
+    static Singleton& getInstance() {
+        static Singleton  instance;
+        return instance;
+    }
+    QString wayToTheElement;
+    int width;
+
+
+
+
 };
 
 #endif // SINGLETON_H

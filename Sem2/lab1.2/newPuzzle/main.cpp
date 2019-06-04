@@ -1,7 +1,9 @@
 #include "authorization.h"
+#include "singleton.h"
 #include <QApplication>
 #include <QDialog>
 #include <QString>
+#include<QDebug>
 
 int width=2;
 QString WayToTheFile;

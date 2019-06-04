@@ -8,6 +8,7 @@ menu1::menu1(QWidget *parent) :
     ui(new Ui::menu1)
 {
     ui->setupUi(this);
+
 }
 
 menu1::~menu1()

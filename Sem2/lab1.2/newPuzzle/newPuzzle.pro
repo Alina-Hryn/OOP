@@ -77,7 +77,8 @@ DISTFILES += \
     4/83.jpg \
     4/84.jpg \
     4/85.jpg \
-    5/9.png
+    5/9.png \
+    back.jpg
 
 
 

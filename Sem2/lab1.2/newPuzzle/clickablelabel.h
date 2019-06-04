@@ -12,6 +12,8 @@ public:
     explicit ClickableLabel(QWidget* parent = Q_NULLPTR, Qt::WindowFlags f = Qt::WindowFlags());
     ~ClickableLabel();
 
+    int place;
+
 signals:
     void clicked();
 

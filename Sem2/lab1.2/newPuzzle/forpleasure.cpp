@@ -2,6 +2,7 @@
 #include "forpleasure.h"
 #include "ui_forpleasure.h"
 #include "puzzle.h"
+#include "singleton.h"
 #include <QFileDialog>
 #include <QLabel>
 #include <QPixmap>
@@ -23,6 +24,7 @@ forPleasure::~forPleasure()
 
 void forPleasure::on_pushButton_clicked()
 {
+
 // картинка, яку вибираю
     if( ui->horizontalLayout_2->count()==1){
         ui->horizontalLayout_2->removeItem(ui->horizontalLayout_2->takeAt(0));
@@ -32,8 +34,9 @@ void forPleasure::on_pushButton_clicked()
                                                     "/pic",
                                                     tr("Images (*.png *.xpm *.jpg)"));
 
+    Singleton::getInstance().wayToTheElement=fileName;
     QPixmap pixmap(fileName);
-
+    Singleton::getInstance().width=ui->spinBox->value();
     pixmap = pixmap.scaled(200, 200, Qt::KeepAspectRatio);
     QLabel *label=new QLabel;
     label->setPixmap(pixmap);
