@@ -6,6 +6,7 @@
 
 QT       += core gui
 
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = newPuzzle
@@ -31,7 +32,9 @@ SOURCES += \
     forpleasure.cpp \
     puzzle.cpp \
     clickablelabel.cpp \
-    singleton.cpp
+    singleton.cpp \
+    levels.cpp \
+    sublevels.cpp
 
 HEADERS += \
         authorization.h \
@@ -40,13 +43,17 @@ HEADERS += \
     authorization.h \
     puzzle.h \
     clickablelabel.h \
-    singleton.h
+    singleton.h \
+    levels.h \
+    sublevels.h
 
 FORMS += \
         authorization.ui \
     menu1.ui \
     forpleasure.ui \
-    puzzle.ui
+    puzzle.ui \
+    levels.ui \
+    sublevels.ui
 
 DISTFILES += \
     1/1.jpg \

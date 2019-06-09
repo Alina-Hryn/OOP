@@ -1,6 +1,7 @@
 
 #include "forpleasure.h"
 #include "ui_forpleasure.h"
+#include "menu1.h"
 #include "puzzle.h"
 #include "singleton.h"
 #include <QFileDialog>
@@ -13,6 +14,7 @@ forPleasure::forPleasure(QWidget *parent) :
     ui(new Ui::forPleasure)
 {
     ui->setupUi(this);
+    Singleton::getInstance().IfLevels=false;
 
 }
 
@@ -55,3 +57,12 @@ void forPleasure::on_pushButton_2_clicked()
 }
 
 
+
+void forPleasure::on_pushButton_4_clicked()
+{
+    hide();
+    menu1 wind;
+    wind.setModal(true);
+    wind.exec();
+
+}

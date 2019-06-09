@@ -13,6 +13,9 @@
 #include <QMouseEvent>
 #include <QDebug>
 
+#include <QMutex>
+
+
 QVector<int> places;
 
 
@@ -21,9 +24,12 @@ puzzle::puzzle(QWidget *parent) :
     ui(new Ui::puzzle)
 {
     ui->setupUi(this);
+    setStyleSheet("background-color:grey;");
     show();
-
-
+    picture1 = NULL;
+    if(Singleton::getInstance().wayToTheElement == nullptr){
+        Singleton::getInstance().wayToTheElement="C:/Users/Alina/Desktop/newPuzzle/1/1.jpg";
+    }
         QPixmap pixmap(Singleton::getInstance().wayToTheElement);
         pixmap = pixmap.scaled(1000, 1000, Qt::IgnoreAspectRatio);
         QPixmap small=pixmap;
@@ -34,12 +40,12 @@ puzzle::puzzle(QWidget *parent) :
         int N = Singleton::getInstance().width;
         QVector <Puzzle> puzzle;
 
-       // QVector<int> places;
+
         for(int i=0;i<N*N;i++){
             places.push_back(i);
         }
         std::random_shuffle(places.begin(), places.end());
-                std::random_shuffle(places.begin(), places.end());
+               // std::random_shuffle(places.begin(), places.end());
 
 
         for(int i=0;i<N;i++){
@@ -58,13 +64,14 @@ puzzle::puzzle(QWidget *parent) :
                     puzzle.push_back(result);
                     label->setPixmap(result.piece);
                     if(result.index==result.place){
-                        label->setStyleSheet("border: 4px solid red;");
+                        label->setStyleSheet("border: 4px solid #FFF851;");
                     }
                     else
-                    label->setStyleSheet("border: 4px double black;");
+                    label->setStyleSheet("border: none;");
 
                     ClickableLabel::connect(label, SIGNAL(clicked()), this, SLOT(pic_clicked()));
                     ui->gridLayout->addWidget(label, result.place/N, result.place%N);
+
                 }
         }
 
@@ -86,7 +93,8 @@ void puzzle::pic_clicked()
         picture1=NULL;
 }
     else {
-
+        qDebug()<< "picture1 2 "<< picture1->index;
+        qDebug()<< "obj                 "<< obj->index;
 
 
         auto gp = qMakePair(-1,-1);
@@ -100,8 +108,8 @@ void puzzle::pic_clicked()
         int rs1,cs1;
         ui->gridLayout->getItemPosition(index1, &gp1.first, &gp1.second, &rs1, &cs1);
 
-        qDebug()<< "picture1 1 "<< picture1->index<<"  "<<picture1->place;
-        qDebug()<< "obj                 "<< obj->index<<"  "<<obj->place;
+        //qDebug()<< "picture1 1 "<< picture1->index<<"  "<<picture1->place;
+        //qDebug()<< "obj                 "<< obj->index<<"  "<<obj->place;
         ui->gridLayout->removeWidget(picture1);
         ui->gridLayout->removeWidget(obj);
         ui->gridLayout->addWidget(picture1, gp.first, gp.second);
@@ -122,32 +130,55 @@ void puzzle::pic_clicked()
 
 
             if(obj->place==obj->index){
-                obj->setStyleSheet("border: 4px solid red; opacity: 0.5;");
+                obj->setStyleSheet("border: 4px solid #FFF851; ");
             }
             if(obj->place != obj->index) {
                 obj->setStyleSheet("border: none;");
             }
             if(picture1->place == picture1->index){
-                picture1->setStyleSheet("border: 4px solid red;");
+                picture1->setStyleSheet("border: 4px solid #FFF851;");
             }
             if(picture1->place != picture1->index) {
                 picture1->setStyleSheet("border: none;");
             }
 
 
-            int trueN =0;
-            for(int i=0;i<places.size();i++){
-                if(places[i]==i){
-                    trueN++;
-                }
-            }
-            if(trueN==places.size()){
-                hide();
-            }
+
 
         picture1 = NULL;
 
+
     }
+    int trueN =0;
+    for(int i=0;i<places.size();i++){
+        if(places[i]==i){
+            trueN++;
+        }
+    }
+    if(trueN==places.size()){
+        QMutex mutex;
+           mutex.lock();
+           //mutex.tryLock(1000);
+           mutex.unlock();
+
+           //checking if this level was visited earlier
+           if(Singleton::getInstance().IfLevels==true){
+               bool a=false;
+               for(int i=0; i<Singleton::getInstance().visitedLevels.size();i++){
+                   if(Singleton::getInstance().visitedLevels[i]==Singleton::getInstance().sublevel){
+                       a=true;
+                   }
+               }
+               if(a==false){
+                   Singleton::getInstance().NumberOfStars++;
+                   Singleton::getInstance().visitedLevels.push_back(Singleton::getInstance().wayToTheElement);
+               }
+           }
+
+            hide();
+
+    }
+
 }
 
 

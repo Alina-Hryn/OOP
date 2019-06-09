@@ -5,11 +5,11 @@
 #include <QString>
 #include<QDebug>
 
-int width=2;
-QString WayToTheFile;
+
 int main(int argc, char *argv[])
 {
-
+    Singleton::getInstance().NumberOfStars=135;
+    Singleton::getInstance().visitedLevels={};
     QApplication a(argc, argv);
     authorization w;
     w.show();

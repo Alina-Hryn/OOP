@@ -3,7 +3,7 @@
 
 #include<QString>
 #include<QDialog>
-
+#include<QVector>
 
 class Singleton
 {
@@ -20,10 +20,10 @@ public:
     }
     QString wayToTheElement;
     int width;
-
-
-
-
+    bool IfLevels;
+    int sublevel;
+    int NumberOfStars;
+    QVector <int> visitedLevels;
 };
 
 #endif // SINGLETON_H

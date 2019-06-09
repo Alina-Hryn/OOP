@@ -28,6 +28,7 @@ private slots:
     void pic_clicked();
 
 
+
 private:
     Ui::puzzle *ui;
 };
