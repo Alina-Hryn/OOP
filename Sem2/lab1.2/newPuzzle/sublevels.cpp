@@ -3,9 +3,11 @@
 #include "singleton.h"
 #include "puzzle.h"
 #include "levels.h"
+#include "menu1.h"
 #include "ui_sublevels.h"
 #include<QMessageBox>
 #include<QDebug>
+#include<QSettings>
 sublevels::sublevels(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::sublevels)
@@ -13,7 +15,7 @@ sublevels::sublevels(QWidget *parent) :
     ui->setupUi(this);
     int level= Singleton::getInstance().sublevel/10;
     if(level==1 || level==5){
-        hide();
+        close();
         puzzle window;
         window.setModal(true);
         window.exec();
@@ -69,7 +71,8 @@ sublevels::~sublevels()
 
 void sublevels::on_pushButton_clicked()
 {
-    levels w;
+    close();
+    menu1 w;
     w.setModal(true);
     w.exec();
 }

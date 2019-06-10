@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT += testlib
 
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -34,7 +35,9 @@ SOURCES += \
     clickablelabel.cpp \
     singleton.cpp \
     levels.cpp \
-    sublevels.cpp
+    sublevels.cpp \
+    settings.cpp \
+    end.cpp
 
 HEADERS += \
         authorization.h \
@@ -45,7 +48,9 @@ HEADERS += \
     clickablelabel.h \
     singleton.h \
     levels.h \
-    sublevels.h
+    sublevels.h \
+    settings.h \
+    end.h
 
 FORMS += \
         authorization.ui \
@@ -53,7 +58,9 @@ FORMS += \
     forpleasure.ui \
     puzzle.ui \
     levels.ui \
-    sublevels.ui
+    sublevels.ui \
+    settings.ui \
+    end.ui
 
 DISTFILES += \
     1/1.jpg \
@@ -85,7 +92,8 @@ DISTFILES += \
     4/84.jpg \
     4/85.jpg \
     5/9.png \
-    back.jpg
+    back.jpg \
+    star.png
 
 
 

@@ -1,4 +1,4 @@
-
+#include<QSettings>
 #include "forpleasure.h"
 #include "ui_forpleasure.h"
 #include "menu1.h"

@@ -4,14 +4,20 @@
 #include <QDialog>
 #include <QString>
 #include<QDebug>
+#include<QSettings>
+
+
+
 
 
 int main(int argc, char *argv[])
 {
-    Singleton::getInstance().NumberOfStars=135;
+
+    Singleton::getInstance().NumberOfStars=0;
     Singleton::getInstance().visitedLevels={};
     QApplication a(argc, argv);
     authorization w;
+    //w.readSettings();
     w.show();
 
     return a.exec();

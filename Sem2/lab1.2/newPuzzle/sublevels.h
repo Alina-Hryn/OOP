@@ -17,6 +17,9 @@ public:
  public slots:
     void clickedSlot();
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::sublevels *ui;
 };

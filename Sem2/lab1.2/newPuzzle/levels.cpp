@@ -4,6 +4,8 @@
 #include "sublevels.h"
 #include "ui_levels.h"
 #include<QStyle>
+#include<QSettings>
+
 levels::levels(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::levels)
@@ -33,16 +35,16 @@ void levels:: makeInvisible(){
 }
 
 void levels:: checkButtons(){
-    if(Singleton::getInstance().NumberOfStars>=15){
+    if(Singleton::getInstance().NumberOfStars>=10){
         ui->pushButton_2->setEnabled(true);
     }
-    if(Singleton::getInstance().NumberOfStars>=30){
+    if(Singleton::getInstance().NumberOfStars>=25){
         ui->pushButton_3->setEnabled(true);
     }
     if(Singleton::getInstance().NumberOfStars>=45){
         ui->pushButton_4->setEnabled(true);
     }
-    if(Singleton::getInstance().NumberOfStars>=15){
+    if(Singleton::getInstance().NumberOfStars>=100){
         ui->pushButton_5->setEnabled(true);
     }
 
@@ -100,23 +102,23 @@ void levels:: on_pushButton_5_clicked(){
 
 
 void levels:: on_pushButton_6_clicked(){
-    goToPuzzle(4,"C:/Users/Alina/Desktop/newPuzzle/1/1.jpg",11);
+    goToPuzzle(2,"C:/Users/Alina/Desktop/newPuzzle/1/1.jpg",11);
 }
 
 void levels:: on_pushButton_7_clicked(){
-    goToPuzzle(4,"C:/Users/Alina/Desktop/newPuzzle/1/2.jpg",12);
+    goToPuzzle(2,"C:/Users/Alina/Desktop/newPuzzle/1/2.jpg",12);
 }
 
 void levels:: on_pushButton_8_clicked(){
-    goToPuzzle(4,"C:/Users/Alina/Desktop/newPuzzle/2/3.jpg",23);
+    goToPuzzle(3,"C:/Users/Alina/Desktop/newPuzzle/2/3.jpg",23);
 }
 
 void levels:: on_pushButton_9_clicked(){
-    goToPuzzle(4,"C:/Users/Alina/Desktop/newPuzzle/2/4.jpg",24);
+    goToPuzzle(3,"C:/Users/Alina/Desktop/newPuzzle/2/4.jpg",24);
 }
 
 void levels:: on_pushButton_10_clicked(){
-    goToPuzzle(4,"C:/Users/Alina/Desktop/newPuzzle/3/5.jpg",35);
+    goToPuzzle(3,"C:/Users/Alina/Desktop/newPuzzle/3/5.jpg",35);
 }
 
 void levels:: on_pushButton_11_clicked(){
@@ -124,7 +126,7 @@ void levels:: on_pushButton_11_clicked(){
 }
 
 void levels:: on_pushButton_12_clicked(){
-    goToPuzzle(4,"C:/Users/Alina/Desktop/newPuzzle/4/7.jpg",47);
+    goToPuzzle(3,"C:/Users/Alina/Desktop/newPuzzle/4/7.jpg",47);
 }
 
 void levels:: on_pushButton_13_clicked(){

@@ -1,6 +1,8 @@
 #include "puzzle.h"
 #include "ui_puzzle.h"
 #include"singleton.h"
+#include"end.h"
+#include"settings.h"
 #include <QFileDialog>
 
 #include <QWidget>
@@ -12,7 +14,7 @@
 #include <QStyle>
 #include <QMouseEvent>
 #include <QDebug>
-
+#include<QSettings>
 #include <QMutex>
 
 
@@ -24,8 +26,8 @@ puzzle::puzzle(QWidget *parent) :
     ui(new Ui::puzzle)
 {
     ui->setupUi(this);
-    setStyleSheet("background-color:grey;");
     show();
+    places.clear();
     picture1 = NULL;
     if(Singleton::getInstance().wayToTheElement == nullptr){
         Singleton::getInstance().wayToTheElement="C:/Users/Alina/Desktop/newPuzzle/1/1.jpg";
@@ -39,7 +41,6 @@ puzzle::puzzle(QWidget *parent) :
         ui->gridLayout_3->addWidget(label, 0,0);
         int N = Singleton::getInstance().width;
         QVector <Puzzle> puzzle;
-
 
         for(int i=0;i<N*N;i++){
             places.push_back(i);
@@ -131,6 +132,7 @@ void puzzle::pic_clicked()
 
             if(obj->place==obj->index){
                 obj->setStyleSheet("border: 4px solid #FFF851; ");
+
             }
             if(obj->place != obj->index) {
                 obj->setStyleSheet("border: none;");
@@ -156,10 +158,7 @@ void puzzle::pic_clicked()
         }
     }
     if(trueN==places.size()){
-        QMutex mutex;
-           mutex.lock();
-           //mutex.tryLock(1000);
-           mutex.unlock();
+
 
            //checking if this level was visited earlier
            if(Singleton::getInstance().IfLevels==true){
@@ -170,12 +169,29 @@ void puzzle::pic_clicked()
                    }
                }
                if(a==false){
-                   Singleton::getInstance().NumberOfStars++;
-                   //Singleton::getInstance().visitedLevels.push_back(Singleton::getInstance().wayToTheElement);
+                   bool ifNew=true;
+                   for(int i=0; i< Singleton::getInstance().visitedLevels.size();i++){
+                       if(Singleton::getInstance().wayToTheElement== Singleton::getInstance().visitedLevels[i])
+                           ifNew=false;
+                   }
+                   if(ifNew){
+                       Singleton::getInstance().NumberOfStars+=5;
+                   }
+                   Singleton::getInstance().visitedLevels.push_back(Singleton::getInstance().wayToTheElement);
                }
            }
-
+           QMutex mutex;
+              mutex.lock();
+              mutex.tryLock(1000);
+              mutex.unlock();
+              Singleton::getInstance().IfLevels=false;
+              Singleton::getInstance().wayToTheElement=nullptr;
+              Singleton::getInstance().sublevel=0;
             hide();
+            End w;
+            w.setModal(true);
+            w.exec();
+
 
     }
 
@@ -186,3 +202,15 @@ puzzle::~puzzle()
 {
     delete ui;
 }
+
+void puzzle::on_pushButton_clicked()
+{
+
+    Settings w;
+    w.setModal(true);
+    w.exec();
+}
+
+
+
+

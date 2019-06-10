@@ -23,7 +23,7 @@ public:
     bool IfLevels;
     int sublevel;
     int NumberOfStars;
-    QVector <int> visitedLevels;
+    QVector <QString> visitedLevels;
 };
 
 #endif // SINGLETON_H

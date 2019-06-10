@@ -23,11 +23,14 @@ public:
            int rotation;
        };
        int N;
+
 private slots:
 
     void pic_clicked();
 
 
+
+    void on_pushButton_clicked();
 
 private:
     Ui::puzzle *ui;
