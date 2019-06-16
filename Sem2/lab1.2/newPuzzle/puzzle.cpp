@@ -26,13 +26,16 @@ puzzle::puzzle(QWidget *parent) :
     ui(new Ui::puzzle)
 {
     ui->setupUi(this);
+    setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowTitleHint);
     show();
     places.clear();
     picture1 = NULL;
     if(Singleton::getInstance().wayToTheElement == nullptr){
-        Singleton::getInstance().wayToTheElement="C:/Users/Alina/Desktop/newPuzzle/1/1.jpg";
+        Singleton::getInstance().wayToTheElement=":/levels/back.jpg";
+        Singleton::getInstance().width=5;
     }
         QPixmap pixmap(Singleton::getInstance().wayToTheElement);
+        //QPixmap pixmap(":/levels/1.jpg");
         pixmap = pixmap.scaled(1000, 1000, Qt::IgnoreAspectRatio);
         QPixmap small=pixmap;
         small = small.scaled(200, 200, Qt::IgnoreAspectRatio);
@@ -182,7 +185,7 @@ void puzzle::pic_clicked()
            }
            QMutex mutex;
               mutex.lock();
-              mutex.tryLock(1000);
+              //mutex.tryLock(1000);
               mutex.unlock();
               Singleton::getInstance().IfLevels=false;
               Singleton::getInstance().wayToTheElement=nullptr;

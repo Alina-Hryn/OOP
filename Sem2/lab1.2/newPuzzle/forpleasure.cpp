@@ -14,6 +14,7 @@ forPleasure::forPleasure(QWidget *parent) :
     ui(new Ui::forPleasure)
 {
     ui->setupUi(this);
+    setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowTitleHint);
     Singleton::getInstance().IfLevels=false;
 
 }
@@ -64,5 +65,13 @@ void forPleasure::on_pushButton_4_clicked()
     menu1 wind;
     wind.setModal(true);
     wind.exec();
+
+}
+
+void forPleasure::on_pushButton_3_clicked()
+{
+    hide();
+    menu1 wind;
+    wind.writeSettings();
 
 }

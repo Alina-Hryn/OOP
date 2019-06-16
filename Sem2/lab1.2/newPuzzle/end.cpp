@@ -2,6 +2,7 @@
 #include "ui_end.h"
 #include "singleton.h"
 #include "levels.h"
+#include "menu1.h"
 #include "forpleasure.h"
 #include<QSettings>
 
@@ -10,9 +11,10 @@ End::End(QWidget *parent) :
     ui(new Ui::End)
 {
     ui->setupUi(this);
+    setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowTitleHint);
     int a= Singleton::getInstance().NumberOfStars;
     ui->label->setText(QString::number(a));
-    QPixmap pixmap("C:/Users/Alina/Desktop/newPuzzle/star.png");
+    QPixmap pixmap(":/levels/star.png");
     pixmap = pixmap.scaled(100, 100, Qt::KeepAspectRatio);
     QLabel *label=new QLabel;
     label->setPixmap(pixmap);
@@ -38,4 +40,11 @@ void End::on_pushButton_clicked()
     levels w;
     w.setModal(true);
     w.exec();
+}
+
+void End::on_pushButton_3_clicked()
+{
+    menu1 wind;
+    wind.writeSettings();
+    hide();
 }

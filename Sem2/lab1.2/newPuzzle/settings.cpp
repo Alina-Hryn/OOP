@@ -11,9 +11,10 @@ Settings::Settings(QWidget *parent) :
     ui(new Ui::Settings)
 {
     ui->setupUi(this);
+    setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowTitleHint);
     int a= Singleton::getInstance().NumberOfStars;
     ui->label->setText(QString::number(a));
-    QPixmap pixmap("C:/Users/Alina/Desktop/newPuzzle/star.png");
+    QPixmap pixmap(":/levels/star.png");
     pixmap = pixmap.scaled(50, 50, Qt::KeepAspectRatio);
     QLabel *label=new QLabel;
     label->setPixmap(pixmap);

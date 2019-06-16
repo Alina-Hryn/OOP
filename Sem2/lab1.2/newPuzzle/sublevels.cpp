@@ -13,6 +13,7 @@ sublevels::sublevels(QWidget *parent) :
     ui(new Ui::sublevels)
 {
     ui->setupUi(this);
+    setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowTitleHint);
     int level= Singleton::getInstance().sublevel/10;
     if(level==1 || level==5){
         close();

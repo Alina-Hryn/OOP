@@ -11,12 +11,12 @@ menu1::menu1(QWidget *parent) :
     ui(new Ui::menu1)
 {
     ui->setupUi(this);
-
+    setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowTitleHint);
 }
 
 void menu1::writeSettings(){
-    QSettings users("Users", "user1");
-    users.beginGroup("user1");
+    QSettings users("Users", "us");
+    users.beginGroup("us");
     users.setValue("numberOfStars", Singleton::getInstance().NumberOfStars);
     QString Visited="";
     for(int i=0; i<Singleton::getInstance().visitedLevels.size();i++){

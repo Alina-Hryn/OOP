@@ -1,5 +1,6 @@
 #include "levels.h"
 #include "puzzle.h"
+#include "menu1.h"
 #include "singleton.h"
 #include "sublevels.h"
 #include "ui_levels.h"
@@ -11,6 +12,7 @@ levels::levels(QWidget *parent) :
     ui(new Ui::levels)
 {
     ui->setupUi(this);
+    setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowTitleHint);
     makeInvisible();
     checkButtons();
     Singleton::getInstance().IfLevels=true;
@@ -63,9 +65,17 @@ void levels::goToPuzzle(int width, QString way, int level){
     Singleton::getInstance().wayToTheElement=way;
     Singleton::getInstance().sublevel=level;
     hide();
+    int lev= Singleton::getInstance().sublevel/10;
+    if(lev==1 || lev==5){
+        hide();
+        puzzle window;
+        window.setModal(true);
+        window.exec();
+    }else{
     sublevels window;
     window.setModal(true);
     window.exec();
+    }
 }
 
 
@@ -97,40 +107,57 @@ void levels::on_pushButton_4_clicked()
 
 void levels:: on_pushButton_5_clicked(){
 
-    goToPuzzle(4,"C:/Users/Alina/Desktop/newPuzzle/5/9.png",51);
+    goToPuzzle(4,":/levels/9.png",51);
 }
 
 
 void levels:: on_pushButton_6_clicked(){
-    goToPuzzle(2,"C:/Users/Alina/Desktop/newPuzzle/1/1.jpg",11);
+    goToPuzzle(2,":/levels/1.jpg",11);
 }
 
 void levels:: on_pushButton_7_clicked(){
-    goToPuzzle(2,"C:/Users/Alina/Desktop/newPuzzle/1/2.jpg",12);
+    goToPuzzle(2,":/levels/2.jpg",12);
 }
 
 void levels:: on_pushButton_8_clicked(){
-    goToPuzzle(3,"C:/Users/Alina/Desktop/newPuzzle/2/3.jpg",23);
+    goToPuzzle(3,":/levels/3.jpg",23);
 }
 
 void levels:: on_pushButton_9_clicked(){
-    goToPuzzle(3,"C:/Users/Alina/Desktop/newPuzzle/2/4.jpg",24);
+    goToPuzzle(3,":/levels/4.jpg",24);
 }
 
 void levels:: on_pushButton_10_clicked(){
-    goToPuzzle(3,"C:/Users/Alina/Desktop/newPuzzle/3/5.jpg",35);
+    goToPuzzle(3,":/levels/5.jpg",35);
 }
 
 void levels:: on_pushButton_11_clicked(){
-    goToPuzzle(4,"C:/Users/Alina/Desktop/newPuzzle/3/6.jpg",36);
+    goToPuzzle(4,":/levels/6.jpg",36);
 }
 
 void levels:: on_pushButton_12_clicked(){
-    goToPuzzle(3,"C:/Users/Alina/Desktop/newPuzzle/4/7.jpg",47);
+    goToPuzzle(3,":/levels/7.jpg",47);
 }
 
 void levels:: on_pushButton_13_clicked(){
-    goToPuzzle(4,"C:/Users/Alina/Desktop/newPuzzle/4/8.jpg",48);
+    goToPuzzle(4,":/levels/8.jpg",48);
 }
 
 
+
+void levels::on_pushButton_14_clicked()
+{
+    hide();
+    menu1 window;
+    window.setModal(true);
+    window.writeSettings();
+    window.exec();
+
+}
+
+void levels::on_pushButton_15_clicked()
+{
+    menu1 window;
+    window.writeSettings();
+    hide();
+}

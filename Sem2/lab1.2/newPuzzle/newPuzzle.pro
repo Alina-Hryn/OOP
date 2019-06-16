@@ -95,5 +95,8 @@ DISTFILES += \
     back.jpg \
     star.png
 
+RESOURCES += \
+    levels.qrc
+
 
 
