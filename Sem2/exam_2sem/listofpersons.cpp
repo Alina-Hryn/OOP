@@ -2,17 +2,20 @@
 #include "ui_listofpersons.h"
 #include "singleton.h"
 #include "newperson.h"
+#include "sortFactory.h"
 #include<QScrollArea>
 
 ListOfPersons::ListOfPersons(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ListOfPersons)
 {
+
     ui->setupUi(this);
-    ui->textEdit->setVisible(false);
+    ui->spinBox->setVisible(false);
+    ui->pushButton_6->setVisible(false);
     Singleton::getInstance().personInTheList=0;
     form(Singleton::getInstance().personInTheList);
-
+    ui->spinBox->setRange(1,Singleton::getInstance().AllOfficials.size());
 
 }
 
@@ -56,5 +59,23 @@ void ListOfPersons::on_pushButton_4_clicked()
 
 void ListOfPersons::on_pushButton_clicked()
 {
-    ui->textEdit->setVisible(true);
+    ui->spinBox->setVisible(true);
+    ui->pushButton_6->setVisible(true);
+    ui->pushButton->setVisible(false);
+}
+
+void ListOfPersons::on_pushButton_6_clicked()
+{
+    if(Singleton::getInstance().personInTheList==ui->spinBox->value()){
+        if(Singleton::getInstance().personInTheList+1>=Singleton::getInstance().AllOfficials.size())
+            Singleton::getInstance().personInTheList=0;
+        form(Singleton::getInstance().personInTheList+1);
+    }
+    Singleton::getInstance().AllOfficials.remove(ui->spinBox->value()-1);
+    Singleton::getInstance().personInTheList=ui->spinBox->value();
+    ui->spinBox->setValue(0);
+    ui->spinBox->setVisible(false);
+    ui->pushButton_6->setVisible(false);
+    ui->pushButton->setVisible(true);
+
 }

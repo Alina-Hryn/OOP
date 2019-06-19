@@ -34,13 +34,13 @@ public:
         }
         else{
             switch (n) {
-            case 1: Compare(f.ministry, s.ministry);
-            case 2: Compare(f.organization, s.organization);
-            case 3: Compare(f.unit, s.unit);
-            case 4: Compare(f.sirname, s.sirname);
-            case 5: Compare(f.name, s.name);
-            case 6: Compare(f.secondName, s.secondName);
-            case 8: Compare(f.univ, s.univ);
+            case 1: return Compare(f.ministry, s.ministry);
+            case 2: return Compare(f.organization, s.organization);
+            case 3: return Compare(f.unit, s.unit);
+            case 4: return Compare(f.sirname, s.sirname);
+            case 5: return Compare(f.name, s.name);
+            case 6: return Compare(f.secondName, s.secondName);
+            case 8: return Compare(f.univ, s.univ);
 
             }
         }

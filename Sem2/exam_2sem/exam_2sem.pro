@@ -31,7 +31,6 @@ SOURCES += \
     slcircular.cpp \
     newperson.cpp \
     sorting.cpp \
-    sort.cpp \
     listofpersons.cpp
 
 HEADERS += \
@@ -40,9 +39,10 @@ HEADERS += \
     slcircular.h \
     newperson.h \
     sorting.h \
-    sort.h \
     singleton.h \
-    listofpersons.h
+    listofpersons.h \
+    sortFactory.h \
+    splaytree.h
 
 FORMS += \
         mainwindow.ui \
