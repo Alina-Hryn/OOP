@@ -1,0 +1,11 @@
+User- person that works with program;
+
+Type- type of elements, which will be sorted;
+
+Simulation- some act of sorting data;
+
+Info- information about choosed sort;
+
+Settings- actions which person can use with simulation;
+
+Width- the number of elements in the row;
