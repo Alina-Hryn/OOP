@@ -14,6 +14,7 @@ public:
 
     int place;
     int index;
+    void emitClick();
 
 signals:
     void clicked();

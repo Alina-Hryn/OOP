@@ -1,6 +1,7 @@
 #ifndef PUZZLE_H
 #define PUZZLE_H
 
+#include<QLayout>
 #include <QDialog>
 #include "clickablelabel.h"
 
@@ -23,7 +24,7 @@ public:
            int rotation;
        };
        int N;
-
+    void swapElements(QLayoutItem *l1,QLayoutItem *l2);
 private slots:
 
     void pic_clicked();

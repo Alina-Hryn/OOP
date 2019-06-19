@@ -78,11 +78,21 @@ puzzle::puzzle(QWidget *parent) :
 
                 }
         }
-
+        QLayoutItem *l1=ui->gridLayout->itemAtPosition(0,0);
+        QLayoutItem *l2=ui->gridLayout->itemAtPosition(0,1);
+        swapElements(l1,l2);
 
 }
 
+void puzzle::swapElements(QLayoutItem *l1,QLayoutItem *l2){
 
+    //ClickableLabel *a=l1->widget();
+    ClickableLabel *a=static_cast<ClickableLabel*>(l1->widget());
+    ClickableLabel *b=static_cast<ClickableLabel*>(l2->widget());
+    picture1=a;
+    b->emitClick();
+
+}
 
 void puzzle::pic_clicked()
 {
@@ -92,12 +102,13 @@ void puzzle::pic_clicked()
 
     if(picture1==NULL){
         picture1=obj;
+
     }
     else if(picture1==obj){
         picture1=NULL;
 }
     else {
-        qDebug()<< "picture1 2 "<< picture1->index;
+        qDebug()<< "picture1  "<< picture1->index;
         qDebug()<< "obj                 "<< obj->index;
 
 

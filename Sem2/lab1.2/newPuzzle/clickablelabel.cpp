@@ -10,3 +10,7 @@ ClickableLabel::~ClickableLabel() {}
 void ClickableLabel::mousePressEvent(QMouseEvent* event) {
     emit clicked();
 }
+void ClickableLabel::emitClick(){
+    emit clicked();
+
+}
