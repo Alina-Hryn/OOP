@@ -42,7 +42,8 @@ HEADERS += \
     singleton.h \
     listofpersons.h \
     sortFactory.h \
-    splaytree.h
+    splaytree.h \
+    bptree.h
 
 FORMS += \
         mainwindow.ui \

@@ -44,15 +44,142 @@ class Insertion: public Sort
 class Heap: public Sort
 {
   public:
+    // To heapify a subtree rooted with node i which is
+    // an index in arr[]. n is size of heap
+    void heapify(int arr[], int n, int i)
+    {
+        int largest = i; // Initialize largest as root
+        int l = 2*i + 1; // left = 2*i + 1
+        int r = 2*i + 2; // right = 2*i + 2
+
+        // If left child is larger than root
+        if (l < n && arr[l] > arr[largest])
+            largest = l;
+
+        // If right child is larger than largest so far
+        if (r < n && arr[r] > arr[largest])
+            largest = r;
+
+        // If largest is not root
+        if (largest != i)
+        {
+            int a=arr[i];
+            arr[i]=arr[largest];
+            arr[largest]=a;
+
+            // Recursively heapify the affected sub-tree
+            heapify(arr, n, largest);
+        }
+    }
     QVector<Official> applysort(QVector<Official> arr, int priority)  {
-    };
+        int r[arr.size()];
+        for(int i=0; i<arr.size();i++){
+            r[i]=arr[i].yearsInMinistry;
+        }
+        // Build heap (rearrange array)
+        int n=arr.size();
+            for (int i = n / 2 - 1; i >= 0; i--)
+                heapify(r, n, i);
+
+            // One by one extract an element from heap
+            for (int i=n-1; i>=0; i--)
+            {
+                // Move current root to end
+
+                int a=r[0];
+                r[0]=r[i];
+                r[i]=a;
+
+                // call max heapify on the reduced heap
+                heapify(r, i, 0);
+            }
+
+    }
 };
 
 class Merge: public Sort
 {
+    //void merge(int arr[], int l, int m, int r) =0;
+
   public:
+    void merge(int arr[], int l, int m, int r)
+    {
+        int i, j, k;
+        int n1 = m - l + 1;
+        int n2 =  r - m;
+
+        /* create temp arrays */
+        int L[n1], R[n2];
+
+        /* Copy data to temp arrays L[] and R[] */
+        for (i = 0; i < n1; i++)
+            L[i] = arr[l + i];
+        for (j = 0; j < n2; j++)
+            R[j] = arr[m + 1+ j];
+
+        /* Merge the temp arrays back into arr[l..r]*/
+        i = 0; // Initial index of first subarray
+        j = 0; // Initial index of second subarray
+        k = l; // Initial index of merged subarray
+        while (i < n1 && j < n2)
+        {
+            if (L[i] <= R[j])
+            {
+                arr[k] = L[i];
+                i++;
+            }
+            else
+            {
+                arr[k] = R[j];
+                j++;
+            }
+            k++;
+        }
+
+        /* Copy the remaining elements of L[], if there
+           are any */
+        while (i < n1)
+        {
+            arr[k] = L[i];
+            i++;
+            k++;
+        }
+
+        /* Copy the remaining elements of R[], if there
+           are any */
+        while (j < n2)
+        {
+            arr[k] = R[j];
+            j++;
+            k++;
+        }
+    }
+
+    /* l is for left index and r is right index of the
+       sub-array of arr to be sorted */
+
+    void mergeSort(int arr[], int l, int r)
+    {
+        if (l < r)
+        {
+            // Same as (l+r)/2, but avoids overflow for
+            // large l and h
+            int m = l+(r-l)/2;
+
+            // Sort first and second halves
+            mergeSort(arr, l, m);
+            mergeSort(arr, m+1, r);
+
+            merge(arr, l, m, r);
+        }
+    }
     QVector<Official> applysort(QVector<Official> arr, int priority)  {
-    };
+        int r[arr.size()];
+        for(int i=0; i<arr.size();i++){
+            r[i]=arr[i].yearsInMinistry;
+        }
+        mergeSort(r, arr[0].yearsInMinistry,arr[arr.size()-1].yearsInMinistry);
+    }
 };
 
 class Bucket: public Sort
