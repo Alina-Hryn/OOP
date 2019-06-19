@@ -16,6 +16,7 @@ public:
         static Singleton  instance;
         return instance;
     }
+    int personInTheList;
    bool ifAscending;
    int typeOfElement;
    int priority;

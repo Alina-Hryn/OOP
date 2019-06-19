@@ -31,7 +31,8 @@ SOURCES += \
     slcircular.cpp \
     newperson.cpp \
     sorting.cpp \
-    sort.cpp
+    sort.cpp \
+    listofpersons.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -40,12 +41,14 @@ HEADERS += \
     newperson.h \
     sorting.h \
     sort.h \
-    singleton.h
+    singleton.h \
+    listofpersons.h
 
 FORMS += \
         mainwindow.ui \
     newperson.ui \
-    sorting.ui
+    sorting.ui \
+    listofpersons.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

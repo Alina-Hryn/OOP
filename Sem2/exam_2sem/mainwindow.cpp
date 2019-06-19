@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include"workwithfiles.h"
 #include"sorting.h"
+#include"listofpersons.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -21,6 +22,13 @@ void MainWindow::on_pushButton_clicked()
 {
     hide();
     Sorting wind;
+    wind.setModal(true);
+    wind.exec();
+}
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    ListOfPersons wind;
     wind.setModal(true);
     wind.exec();
 }

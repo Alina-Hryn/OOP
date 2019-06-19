@@ -13,7 +13,7 @@ class Sort
     virtual void info() = 0;
     virtual ~Sort() {}
 };
-
+/*
 class Insertion: public Sort
 {
   public:
@@ -118,5 +118,6 @@ class BucketFacory: public SortFacory
     }
 };
 
+*/
 
-
+#endif // SORT_H
