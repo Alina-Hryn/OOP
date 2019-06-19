@@ -1,5 +1,6 @@
 #include "workwithfiles.h"
 #include"slcircular.h"
+#include"singleton.h"
 
 #include<QFile>
 #include<QIODevice>
@@ -22,29 +23,31 @@ void WorkWithFiles::readFile(){
     {
          QByteArray line = file.readLine();
          QString str = QString::fromUtf8(line);
-         qDebug()<<str;
-        int pos = str.lastIndexOf(QChar('<'));
-        person.ministry=str.left(pos);
-        str=str.right(str.size()-pos-1);
-        pos = str.lastIndexOf(QChar('>'));
-        person.organization=str.left(pos);
-        str=str.right(str.size()-pos-1);
-        pos = str.lastIndexOf(QChar('{'));
-        person.unit=str.left(pos);
-        str=str.right(str.size()-pos-1);
-
-
-
-        pos = str.lastIndexOf(QChar('}'));
+         //qDebug()<<str;
+         str=str.left(str.size()-3);
+        int pos = str.lastIndexOf(QChar(';'));
+        person.univ=str.right(str.size()-pos-1);
+        str=str.left(pos);
+        pos = str.lastIndexOf(QChar(';'));
+        person.yearsInMinistry=str.right(str.size()-pos-1).toInt();
         str=str.left(pos);
         pos = str.lastIndexOf(QChar(';'));
         person.secondName=str.right(str.size()-pos-1);
         str=str.left(pos);
         pos = str.lastIndexOf(QChar(';'));
-        person.sirname=str.left(pos);
         person.name=str.right(str.size()-pos-1);
-        //list->Add(person);
-        qDebug()<<person.ministry<<"  "<<person.organization<<"  "<<person.unit<<"  "<<person.sirname<<"  "<<person.name<<"  "<<person.secondName<<"  ";
+        str=str.left(pos);
+        pos = str.lastIndexOf(QChar(';'));
+        person.sirname=str.right(str.size()-pos-1);
+        str=str.left(pos);
+        pos = str.lastIndexOf(QChar(';'));
+        person.unit=str.right(str.size()-pos-1);
+        str=str.left(pos);
+        pos = str.lastIndexOf(QChar(';'));
+        person.organization=str.right(str.size()-pos-1);
+        person.ministry=str.left(pos);
+        Singleton::getInstance().AllOfficials.push_back(person);
+        qDebug()<<person.ministry<<"  "<<person.organization<<"  "<<person.unit<<"  "<<person.sirname<<"  "<<person.name<<"  "<<person.secondName<<"  "<<person.yearsInMinistry<<"  "<<person.univ<<"  ";
     }
-    qDebug()<<list->Count();
+    //qDebug()<<list->Count();
 }

@@ -9,6 +9,42 @@ struct Official{
     QString sirname;
     QString name;
     QString secondName;
+    int yearsInMinistry;
+    QString univ;
+public:
+    bool Compare(QString a, QString b){
+        int min=a.size();
+        if(a > b)
+            min=b.size();
+        for(int i=0;i < min;i++){
+            if(a[i] < b[i])
+                return true;
+            if(a[i] > b[i])
+                return false;
+        }
+        return true;
+    }
+    bool Larger(Official f, Official s, int n){
+        if( n==7){
+            if(f.yearsInMinistry>s.yearsInMinistry)
+                return true;
+            else {
+                return false;
+            }
+        }
+        else{
+            switch (n) {
+            case 1: Compare(f.ministry, s.ministry);
+            case 2: Compare(f.organization, s.organization);
+            case 3: Compare(f.unit, s.unit);
+            case 4: Compare(f.sirname, s.sirname);
+            case 5: Compare(f.name, s.name);
+            case 6: Compare(f.secondName, s.secondName);
+            case 8: Compare(f.univ, s.univ);
+
+            }
+        }
+    }
 };
 class SLcircular
 {

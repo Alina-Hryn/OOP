@@ -28,15 +28,24 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     workwithfiles.cpp \
-    slcircular.cpp
+    slcircular.cpp \
+    newperson.cpp \
+    sorting.cpp \
+    sort.cpp
 
 HEADERS += \
         mainwindow.h \
     workwithfiles.h \
-    slcircular.h
+    slcircular.h \
+    newperson.h \
+    sorting.h \
+    sort.h \
+    singleton.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    newperson.ui \
+    sorting.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
