@@ -21,6 +21,7 @@ public:
        int N;
     void swapElements(QLayoutItem *l1,QLayoutItem *l2);
     void bubbleSort();
+    bool IfFinished();
 private slots:
 
     void pic_clicked();

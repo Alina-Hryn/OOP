@@ -50,7 +50,8 @@ HEADERS += \
     levels.h \
     sublevels.h \
     settings.h \
-    end.h
+    end.h \
+    testing.h
 
 FORMS += \
         authorization.ui \

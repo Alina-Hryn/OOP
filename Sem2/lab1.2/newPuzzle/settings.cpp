@@ -3,6 +3,8 @@
 #include "puzzle.h"
 #include "singleton.h"
 #include "ui_settings.h"
+#include "puzzle.h"
+#include "levels.h"
 #include<QStyle>
 #include<QSettings>
 
@@ -32,4 +34,15 @@ Settings::~Settings()
 void Settings::on_pushButton_clicked()
 {
     hide();
+}
+
+void Settings::on_pushButton_2_clicked()
+{
+    close();
+    puzzle wind;
+    wind.close();
+    levels w;
+    w.setModal(true);
+    w.exec();
+
 }

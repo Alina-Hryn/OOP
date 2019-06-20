@@ -56,6 +56,13 @@
       </property>
      </widget>
     </item>
+    <item>
+     <widget class="QPushButton" name="pushButton_2">
+      <property name="text">
+       <string>go back to levels</string>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
  </widget>

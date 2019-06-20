@@ -84,19 +84,14 @@ puzzle::puzzle(QWidget *parent) :
 
                 }
         }
-        /*for(int i=0; i<places.size();i++){
-            qDebug()<<places[i];
-        }*/
-        //swapElements(0,1);
+
 
 
 }
 
 void puzzle::swapElements(QLayoutItem *l1,QLayoutItem *l2){
 
-    //ClickableLabel *a=l1->widget();
-   // qDebug()<<l1;
-    //qDebug()<<l2;
+
     ClickableLabel *a=static_cast<ClickableLabel*>(l1->widget());
     ClickableLabel *b=static_cast<ClickableLabel*>(l2->widget());
     picture1=a;
@@ -107,14 +102,14 @@ void puzzle::swapElements(QLayoutItem *l1,QLayoutItem *l2){
 
 
 
-// A function to implement bubble sort
+
 void puzzle::bubbleSort()
 {
     int n=places.size();
     N=Singleton::getInstance().width;
    int j;
    for (j = 0; j < n; j++){
-           // qDebug()<<places[j]<<places[j+1];
+
        if(places[j]!=j){
            QLayoutItem *l1=ui->gridLayout->itemAtPosition(j/N, j%N);
            QLayoutItem *l2=ui->gridLayout->itemAtPosition(places[j]/N, places[j]%N);
@@ -144,8 +139,8 @@ void puzzle::pic_clicked()
         picture1=NULL;
 }
     else {
-        qDebug()<< "picture1  "<< picture1->index;
-        qDebug()<< "obj                 "<< obj->index;
+        //qDebug()<< "picture1  "<< picture1->index;
+        //qDebug()<< "obj                 "<< obj->index;
 
 
         auto gp = qMakePair(-1,-1);
@@ -174,8 +169,7 @@ void puzzle::pic_clicked()
 
       places[picture1->index]=picture1->place;
       places[obj->index]=obj->place;
-     // qDebug()<< "picture1 2 "<< picture1->index<<"  "<<places[picture1->index];
-     // qDebug()<< "obj                 "<< obj->index<<"  "<<places[obj->index];
+
 
 
 
@@ -202,13 +196,8 @@ void puzzle::pic_clicked()
 
     }
 
-    int trueN =0;
-    for(int i=0;i<places.size();i++){
-        if(places[i]==i){
-            trueN++;
-        }
-    }
-    if(trueN==places.size()){
+
+    if(IfFinished()){
 
 
             if(Singleton::getInstance().IfLevels==true){
@@ -252,6 +241,19 @@ void puzzle::pic_clicked()
 
 }
 
+bool puzzle::IfFinished(){
+    int trueN =0;
+    for(int i=0;i<places.size();i++){
+        if(places[i]==i){
+            trueN++;
+        }
+    }
+    if(trueN==places.size())
+        return true;
+    else {
+       return false;
+    }
+}
 
 puzzle::~puzzle()
 {
