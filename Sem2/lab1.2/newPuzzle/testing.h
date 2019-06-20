@@ -3,6 +3,7 @@
 #include"puzzle.h"
 #include <QtTest/QtTest>
 
+
 class TestQString: public QObject
 {
     Q_OBJECT

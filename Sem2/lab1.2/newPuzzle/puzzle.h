@@ -20,7 +20,8 @@ public:
 
        int N;
     void swapElements(QLayoutItem *l1,QLayoutItem *l2);
-    void bubbleSort();
+    void sort();
+    void help();
     bool IfFinished(QVector<int> places);
 private slots:
 

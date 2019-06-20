@@ -86,7 +86,6 @@ puzzle::puzzle(QWidget *parent) :
         }
 
 
-
 }
 
 void puzzle::swapElements(QLayoutItem *l1,QLayoutItem *l2){
@@ -100,10 +99,21 @@ void puzzle::swapElements(QLayoutItem *l1,QLayoutItem *l2){
 }
 
 
+void puzzle::help(){
+    bool q=false;
+    for(int i=0;i<places.size();i++){
+      if(places[i]!=i && q==false){
+          QLayoutItem *l1=ui->gridLayout->itemAtPosition(i/N, i%N);
+          QLayoutItem *l2=ui->gridLayout->itemAtPosition(places[i]/N, places[i]%N);
+          swapElements(l1,l2);
+          q=true;
+          break;
+    }
 
+}
+}
 
-
-void puzzle::bubbleSort()
+void puzzle::sort()
 {
     int n=places.size();
     N=Singleton::getInstance().width;
@@ -274,7 +284,8 @@ void puzzle::on_pushButton_clicked()
 
 void puzzle::on_pushButton_2_clicked()
 {
-    bubbleSort();
+    sort();
+    //help();
 }
 
 void puzzle::on_pushButton_3_clicked()
