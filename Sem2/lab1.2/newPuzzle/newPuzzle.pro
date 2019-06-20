@@ -51,7 +51,8 @@ HEADERS += \
     sublevels.h \
     settings.h \
     end.h \
-    testing.h
+    testing.h \
+    sortfactory.h
 
 FORMS += \
         authorization.ui \

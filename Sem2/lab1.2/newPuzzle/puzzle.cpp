@@ -3,6 +3,7 @@
 #include"singleton.h"
 #include"end.h"
 #include"settings.h"
+#include"sortfactory.h"
 #include <QFileDialog>
 
 #include <QWidget>
@@ -84,8 +85,15 @@ puzzle::puzzle(QWidget *parent) :
 
                 }
         }
-
-
+        for(auto off : places) {
+            qDebug()<<places[off];
+        }
+        SortFactory* sortFactory= new BubbleFactory();
+        Sort* s=sortFactory->createSort();
+        s->applysort(places);
+        for(auto off : places) {
+            qDebug()<<places[off];
+        }
 }
 
 void puzzle::swapElements(QLayoutItem *l1,QLayoutItem *l2){
@@ -109,8 +117,8 @@ void puzzle::help(){
           q=true;
           break;
     }
-
 }
+
 }
 
 void puzzle::sort()
