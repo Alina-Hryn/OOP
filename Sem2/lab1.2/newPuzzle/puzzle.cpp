@@ -15,7 +15,7 @@
 #include <QMouseEvent>
 #include <QDebug>
 #include<QSettings>
-#include <QMutex>
+#include <QThread>
 
 
 QVector<int> places;
@@ -25,7 +25,13 @@ puzzle::puzzle(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::puzzle)
 {
+
     ui->setupUi(this);
+    ui->label->setVisible(false);
+    if(Singleton::getInstance().IfLevels==true){
+        ui->pushButton_2->setVisible(false);
+        ui->pushButton_3->setVisible(false);
+    }
     setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowTitleHint);
     show();
     places.clear();
@@ -43,11 +49,12 @@ puzzle::puzzle(QWidget *parent) :
         label->setPixmap(small);
         ui->gridLayout_3->addWidget(label, 0,0);
         int N = Singleton::getInstance().width;
-        QVector <Puzzle> puzzle;
+
 
         for(int i=0;i<N*N;i++){
             places.push_back(i);
         }
+
         std::random_shuffle(places.begin(), places.end());
                // std::random_shuffle(places.begin(), places.end());
 
@@ -58,41 +65,70 @@ puzzle::puzzle(QWidget *parent) :
                     ClickableLabel *label = new ClickableLabel();
                     label->place=places[i*N+j];
                     label->index=(i)*N+j;
-                    Puzzle result;
-                    result.index=(i)*N+j;
-                    result.place=places[i*N+j];
+                    qDebug()<<label->index;
+                    qDebug()<<label->place;
+
                     QRect rect(j*1000/N, i*1000/N, 1000/N, 1000/N);
                     QPixmap cropped = pixmap.copy(rect);
                     cropped = cropped.scaled(1000/N/2, 1000/N/2, Qt::IgnoreAspectRatio);
-                    result.piece=cropped;
-                    puzzle.push_back(result);
-                    label->setPixmap(result.piece);
-                    if(result.index==result.place){
+
+                    label->setPixmap(cropped);
+                    if(label->index==label->place){
                         label->setStyleSheet("border: 4px solid #FFF851;");
                     }
                     else
                     label->setStyleSheet("border: none;");
 
                     ClickableLabel::connect(label, SIGNAL(clicked()), this, SLOT(pic_clicked()));
-                    ui->gridLayout->addWidget(label, result.place/N, result.place%N);
+                    ui->gridLayout->addWidget(label, label->place/N, label->place%N);
 
                 }
         }
-        QLayoutItem *l1=ui->gridLayout->itemAtPosition(0,0);
-        QLayoutItem *l2=ui->gridLayout->itemAtPosition(0,1);
-        swapElements(l1,l2);
+        /*for(int i=0; i<places.size();i++){
+            qDebug()<<places[i];
+        }*/
+        //swapElements(0,1);
+
 
 }
 
 void puzzle::swapElements(QLayoutItem *l1,QLayoutItem *l2){
 
     //ClickableLabel *a=l1->widget();
+   // qDebug()<<l1;
+    //qDebug()<<l2;
     ClickableLabel *a=static_cast<ClickableLabel*>(l1->widget());
     ClickableLabel *b=static_cast<ClickableLabel*>(l2->widget());
     picture1=a;
     b->emitClick();
 
 }
+
+
+
+
+// A function to implement bubble sort
+void puzzle::bubbleSort()
+{
+    int n=places.size();
+    N=Singleton::getInstance().width;
+   int j;
+   for (j = 0; j < n; j++){
+           // qDebug()<<places[j]<<places[j+1];
+       if(places[j]!=j){
+           QLayoutItem *l1=ui->gridLayout->itemAtPosition(j/N, j%N);
+           QLayoutItem *l2=ui->gridLayout->itemAtPosition(places[j]/N, places[j]%N);
+           swapElements(l1,l2);
+           j--;
+       }
+
+
+   }
+
+
+}
+
+
 
 void puzzle::pic_clicked()
 {
@@ -165,6 +201,7 @@ void puzzle::pic_clicked()
 
 
     }
+
     int trueN =0;
     for(int i=0;i<places.size();i++){
         if(places[i]==i){
@@ -174,6 +211,9 @@ void puzzle::pic_clicked()
     if(trueN==places.size()){
 
 
+            if(Singleton::getInstance().IfLevels==true){
+                ui->label->setVisible(true);
+            }
            //checking if this level was visited earlier
            if(Singleton::getInstance().IfLevels==true){
                bool a=false;
@@ -190,21 +230,22 @@ void puzzle::pic_clicked()
                    }
                    if(ifNew){
                        Singleton::getInstance().NumberOfStars+=5;
+
                    }
                    Singleton::getInstance().visitedLevels.push_back(Singleton::getInstance().wayToTheElement);
                }
            }
-           QMutex mutex;
-              mutex.lock();
-              //mutex.tryLock(1000);
-              mutex.unlock();
+           if(Singleton::getInstance().IfLevels==true){
+               close();
+               End w;
+               w.setModal(true);
+               w.exec();
+
+           }
               Singleton::getInstance().IfLevels=false;
               Singleton::getInstance().wayToTheElement=nullptr;
               Singleton::getInstance().sublevel=0;
-            hide();
-            End w;
-            w.setModal(true);
-            w.exec();
+
 
 
     }
@@ -228,3 +269,18 @@ void puzzle::on_pushButton_clicked()
 
 
 
+
+void puzzle::on_pushButton_2_clicked()
+{
+    bubbleSort();
+}
+
+void puzzle::on_pushButton_3_clicked()
+{
+
+    close();
+    End w;
+    w.setModal(true);
+    w.exec();
+
+}

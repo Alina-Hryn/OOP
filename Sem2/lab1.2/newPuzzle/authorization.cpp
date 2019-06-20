@@ -30,8 +30,8 @@ authorization::authorization(QWidget *parent) :
 
 
 void authorization::readSettings(){
-    QSettings users("Users", "us");
-    users.beginGroup("us");
+    QSettings users("Users", "puzzle");
+    users.beginGroup("puzzle");
     Singleton::getInstance().NumberOfStars = users.value("numberOfStars", 0).toInt();
     QString w = users.value("visited Levels", "").toString();
 

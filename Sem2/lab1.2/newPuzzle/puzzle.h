@@ -17,14 +17,10 @@ public:
     explicit puzzle(QWidget *parent = nullptr);
     ~puzzle();
     ClickableLabel* picture1;
-       struct Puzzle{
-           QPixmap piece;
-           int index;
-           int place;
-           int rotation;
-       };
+
        int N;
     void swapElements(QLayoutItem *l1,QLayoutItem *l2);
+    void bubbleSort();
 private slots:
 
     void pic_clicked();
@@ -32,6 +28,10 @@ private slots:
 
 
     void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_3_clicked();
 
 private:
     Ui::puzzle *ui;

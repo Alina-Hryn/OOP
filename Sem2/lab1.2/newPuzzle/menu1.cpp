@@ -15,8 +15,8 @@ menu1::menu1(QWidget *parent) :
 }
 
 void menu1::writeSettings(){
-    QSettings users("Users", "us");
-    users.beginGroup("us");
+    QSettings users("Users", "puzzle");
+    users.beginGroup("puzzle");
     users.setValue("numberOfStars", Singleton::getInstance().NumberOfStars);
     QString Visited="";
     for(int i=0; i<Singleton::getInstance().visitedLevels.size();i++){
