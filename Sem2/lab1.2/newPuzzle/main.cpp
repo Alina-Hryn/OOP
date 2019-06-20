@@ -1,5 +1,6 @@
 #include "authorization.h"
 #include "singleton.h"
+//#include "testing.h"
 #include <QApplication>
 #include <QDialog>
 #include <QString>
@@ -18,6 +19,8 @@ int main(int argc, char *argv[])
     authorization w;
     //w.readSettings();
     w.show();
+    /*TestQString test;
+    test.FinishingThePuzzle();*/
 
     return a.exec();
 }

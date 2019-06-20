@@ -197,7 +197,7 @@ void puzzle::pic_clicked()
     }
 
 
-    if(IfFinished()){
+    if(IfFinished(places)){
 
 
             if(Singleton::getInstance().IfLevels==true){
@@ -241,7 +241,7 @@ void puzzle::pic_clicked()
 
 }
 
-bool puzzle::IfFinished(){
+bool puzzle::IfFinished(QVector<int> places){
     int trueN =0;
     for(int i=0;i<places.size();i++){
         if(places[i]==i){
