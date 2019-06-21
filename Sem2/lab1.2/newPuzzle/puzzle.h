@@ -3,6 +3,8 @@
 
 #include<QLayout>
 #include <QDialog>
+#include<QTime>
+#include<QTimer>
 #include "clickablelabel.h"
 
 namespace Ui {
@@ -23,8 +25,9 @@ public:
     void sort();
     void help();
     bool IfFinished(QVector<int> places);
+    void showStep();
 private slots:
-
+     void updateTime();
     void pic_clicked();
 
 
@@ -35,8 +38,13 @@ private slots:
 
     void on_pushButton_3_clicked();
 
+    void on_pushButton_5_clicked();
+
+    void on_pushButton_4_clicked();
+
 private:
     Ui::puzzle *ui;
+    QTimer *tmr;
 };
 
 #endif // PUZZLE_H

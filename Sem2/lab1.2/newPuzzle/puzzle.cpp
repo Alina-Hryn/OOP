@@ -28,6 +28,9 @@ puzzle::puzzle(QWidget *parent) :
 {
 
     ui->setupUi(this);
+
+
+
     ui->label->setVisible(false);
     if(Singleton::getInstance().IfLevels==true){
         ui->pushButton_2->setVisible(false);
@@ -85,16 +88,52 @@ puzzle::puzzle(QWidget *parent) :
 
                 }
         }
-        for(auto off : places) {
-            qDebug()<<places[off];
-        }
+
+
+        Singleton::getInstance().stepsForSorting.clear();
         SortFactory* sortFactory= new BubbleFactory();
+        QVector<int> array;
+        for(int i=0;i<array.size();i++){
+            array[i]=i;
+            array.push_back(array[i]);
+        }
+        Singleton::getInstance().stepsForSorting.push_back(array);
         Sort* s=sortFactory->createSort();
         s->applysort(places);
-        for(auto off : places) {
-            qDebug()<<places[off];
-        }
+        Singleton::getInstance().step=0;
+
 }
+
+void puzzle::showStep(){
+    QLayoutItem *l1=nullptr;
+    QLayoutItem *l2=nullptr;
+    N=Singleton::getInstance().width;
+    for(int j=0;j<places.size();j++){
+
+        if(places[j]!=Singleton::getInstance().stepsForSorting[Singleton::getInstance().step][j] && l1!=nullptr){
+            l2=ui->gridLayout->itemAtPosition(j/N, j%N);
+
+
+            swapElements(l1,l2);
+            l1=nullptr;
+            l2=nullptr;
+
+
+        }
+        if(places[j]!=Singleton::getInstance().stepsForSorting[Singleton::getInstance().step][j] && l1==nullptr)
+            l1=ui->gridLayout->itemAtPosition(j/N, j%N);
+
+    }
+}
+
+void puzzle::updateTime()
+{
+
+
+    QThread::msleep(500);
+}
+
+
 
 void puzzle::swapElements(QLayoutItem *l1,QLayoutItem *l2){
 
@@ -303,5 +342,36 @@ void puzzle::on_pushButton_3_clicked()
     End w;
     w.setModal(true);
     w.exec();
+
+}
+
+void puzzle::on_pushButton_5_clicked()
+{
+    if(Singleton::getInstance().step<Singleton::getInstance().stepsForSorting.size() &&Singleton::getInstance().step>0){
+        ui->pushButton_5->setEnabled(true);
+        ui->pushButton_4->setEnabled(true);
+    }
+
+    if(Singleton::getInstance().step+1<Singleton::getInstance().stepsForSorting.size())
+        Singleton::getInstance().step++;
+     if(Singleton::getInstance().step+1==Singleton::getInstance().stepsForSorting.size()){
+        ui->pushButton_5->setEnabled(false);
+    }
+    showStep();
+
+}
+
+void puzzle::on_pushButton_4_clicked()
+{
+    if(Singleton::getInstance().step<Singleton::getInstance().stepsForSorting.size() &&Singleton::getInstance().step>0){
+        ui->pushButton_4->setEnabled(true);
+        ui->pushButton_5->setEnabled(true);
+    }
+    if(Singleton::getInstance().step-1>0)
+        Singleton::getInstance().step--;
+     if(Singleton::getInstance().step-1==0){
+        ui->pushButton_4->setEnabled(false);
+    }
+    showStep();
 
 }

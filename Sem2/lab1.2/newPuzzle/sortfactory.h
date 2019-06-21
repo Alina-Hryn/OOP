@@ -6,6 +6,8 @@
 #include"puzzle.h"
 #include <algorithm>
 #include<QDebug>
+#include<QtAlgorithms>
+
 
 class Sort
 {
@@ -19,16 +21,28 @@ class Sort
 class Insertion: public Sort
 {
   public:
-    void applysort(QVector<int> &arr) {
-        for (auto it = arr.begin(); it != arr.end(); it++)
-            {
+    void applysort(QVector<int> &data) {
+        int j, val;
 
-                auto const insertion_point =
-                        std::upper_bound(arr.begin(), it, *it);
+          //iterate through entire list
+          for(int i = 1; i < data.size(); i++){
+             val = data[i];
+             j = i - 1;
 
+             while(j >= 0 && data[j] > val){
+                       data[j + 1] = data[j];
+                       j = j - 1;
 
-                std::rotate(insertion_point, it, it+1);
-            }
+             }//end while
+             data[j + 1] = val;
+             QVector<int> array;
+             for(int i=0;i<data.size();i++){
+                 qDebug()<<data[i];
+                 array.push_back(data[i]);
+             }
+             Singleton::getInstance().stepsForSorting.push_back(array);
+
+    }
     }
 
 };
@@ -47,11 +61,21 @@ class Bubble: public Sort
                        arr[i+1] = arr[i] - arr[i+1];
                        arr[i] -=arr[i+1];
                        swapp = true;
+                       QVector<int> array;
+                       for(int i=0;i<arr.size();i++){
+                           qDebug()<<arr[i];
+                           array.push_back(arr[i]);
+                       }
+                       Singleton::getInstance().stepsForSorting.push_back(array);
                    }
                }
            }
      }
 };
+
+
+
+
 
 class Heap: public Sort
 {
@@ -65,6 +89,13 @@ class Heap: public Sort
         temp = vHeap[i];
         vHeap[i] = vHeap[j];
         vHeap[j] = temp;
+        QVector<int> array;
+        for(int i=0;i<vHeap.size();i++){
+            qDebug()<<vHeap[i];
+            array.push_back(vHeap[i]);
+        }
+        Singleton::getInstance().stepsForSorting.push_back(array);
+
     }
     void Sift(QVector<int>& vHeap, const QVector<int>::size_type heapSize, const QVector<int>::size_type siftNode)
     {
@@ -99,6 +130,8 @@ class Heap: public Sort
             {
                 Swap(arr, i, 0);
                 Sift(arr, i, 0);
+
+
             }
     }
 };
@@ -120,12 +153,24 @@ class Quick: public Sort
           tmp =  a[from_right];
           a[from_right] = a[from_left];
           a[from_left] = tmp;
+          QVector<int> array;
+          for(int i=0;i<a.size();i++){
+              qDebug()<<a[i];
+              array.push_back(a[i]);
+          }
+          Singleton::getInstance().stepsForSorting.push_back(array);
         }
       }
 
       if (a[from_left]>pivot) from_left--;
       a[start] = a[from_left];
       a[from_left] = pivot;
+      QVector<int> array;
+      for(int i=0;i<a.size();i++){
+          qDebug()<<a[i];
+          array.push_back(a[i]);
+      }
+      Singleton::getInstance().stepsForSorting.push_back(array);
 
       return (from_left);
     }
@@ -192,6 +237,7 @@ class QuickFactory: public SortFactory
     }
 
 };
+
 
 
 

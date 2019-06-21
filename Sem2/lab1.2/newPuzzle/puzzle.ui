@@ -71,14 +71,14 @@
   <widget class="QPushButton" name="pushButton_2">
    <property name="geometry">
     <rect>
-     <x>690</x>
-     <y>110</y>
+     <x>800</x>
+     <y>310</y>
      <width>93</width>
      <height>28</height>
     </rect>
    </property>
    <property name="text">
-    <string>sort</string>
+    <string>&gt;&gt;</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_3">
@@ -97,8 +97,8 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>420</x>
-     <y>60</y>
+     <x>450</x>
+     <y>40</y>
      <width>394</width>
      <height>179</height>
     </rect>
@@ -111,6 +111,32 @@
    </property>
    <property name="text">
     <string>CONGRATULATIONS</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_4">
+   <property name="geometry">
+    <rect>
+     <x>800</x>
+     <y>240</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_5">
+   <property name="geometry">
+    <rect>
+     <x>800</x>
+     <y>280</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&gt;</string>
    </property>
   </widget>
  </widget>
