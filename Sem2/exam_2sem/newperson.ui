@@ -28,10 +28,10 @@
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>190</x>
-     <y>10</y>
-     <width>441</width>
-     <height>771</height>
+     <x>130</x>
+     <y>30</y>
+     <width>541</width>
+     <height>751</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -41,10 +41,10 @@
        <enum>QLayout::SetMinimumSize</enum>
       </property>
       <property name="topMargin">
-       <number>30</number>
+       <number>0</number>
       </property>
       <property name="bottomMargin">
-       <number>30</number>
+       <number>0</number>
       </property>
       <item>
        <widget class="QLabel" name="label">
@@ -66,12 +66,25 @@
      </layout>
     </item>
     <item>
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
      <layout class="QHBoxLayout" name="horizontalLayout_5">
       <property name="topMargin">
-       <number>30</number>
+       <number>0</number>
       </property>
       <property name="bottomMargin">
-       <number>20</number>
+       <number>0</number>
       </property>
       <item>
        <widget class="QLabel" name="label_2">
@@ -93,15 +106,28 @@
      </layout>
     </item>
     <item>
+     <spacer name="verticalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
      <layout class="QHBoxLayout" name="horizontalLayout_4">
       <property name="sizeConstraint">
        <enum>QLayout::SetMinimumSize</enum>
       </property>
       <property name="topMargin">
-       <number>30</number>
+       <number>0</number>
       </property>
       <property name="bottomMargin">
-       <number>30</number>
+       <number>0</number>
       </property>
       <item>
        <widget class="QLabel" name="label_6">
@@ -123,15 +149,28 @@
      </layout>
     </item>
     <item>
+     <spacer name="verticalSpacer_3">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
      <layout class="QHBoxLayout" name="horizontalLayout_6">
       <property name="sizeConstraint">
        <enum>QLayout::SetMinimumSize</enum>
       </property>
       <property name="topMargin">
-       <number>30</number>
+       <number>0</number>
       </property>
       <property name="bottomMargin">
-       <number>30</number>
+       <number>0</number>
       </property>
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -211,6 +250,63 @@
      </layout>
     </item>
     <item>
+     <spacer name="verticalSpacer_4">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_6">
+        <item>
+         <widget class="QLabel" name="label_7">
+          <property name="text">
+           <string>years in ministry</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="spinBox"/>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="label_8">
+          <property name="text">
+           <string>university</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTextEdit" name="textEdit_7"/>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
      <widget class="QPushButton" name="pushButton_2">
       <property name="text">
        <string>add</string>
@@ -221,13 +317,6 @@
      <widget class="QPushButton" name="pushButton_3">
       <property name="text">
        <string>check</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="pushButton_4">
-      <property name="text">
-       <string>delete</string>
       </property>
      </widget>
     </item>

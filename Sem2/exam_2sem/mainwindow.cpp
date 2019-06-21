@@ -21,7 +21,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    hide();
+
     Sorting wind;
     wind.setModal(true);
     wind.exec();
@@ -39,4 +39,9 @@ void MainWindow::on_pushButton_2_clicked()
     NewPerson w;
     w.setModal(true);
     w.exec();
+}
+
+void MainWindow::on_pushButton_5_clicked()
+{
+    close();
 }

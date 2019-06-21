@@ -79,3 +79,16 @@ void ListOfPersons::on_pushButton_6_clicked()
     ui->pushButton->setVisible(true);
 
 }
+
+void ListOfPersons::on_pushButton_2_clicked()
+{
+    close();
+}
+
+void ListOfPersons::on_pushButton_3_clicked()
+{
+    close();
+    NewPerson w;
+    w.setModal(true);
+    w.exec();
+}

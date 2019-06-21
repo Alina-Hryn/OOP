@@ -9,206 +9,159 @@
 class Sort
 {
   public:
-    QVector<Official> unsorted;
-    int numberOfElements;
-    virtual QVector<Official> applysort(QVector<Official> arr, int priority) = 0;
+    virtual void applysort(QVector<int> &arr) = 0;
+
 
 };
+
+
 
 class Insertion: public Sort
 {
   public:
-    QVector<Official> applysort(QVector<Official> arr, int priority) {
-        int i,j;
-        int n=arr.size();
-        //qDebug()<<arr;
-        Official key;
-           for (i = 1; i < n; i++)
-           {
-               key = arr[i];
-               j = i - 1;
+    void applysort(QVector<int> &data) {
 
-               while (j >= 0 && arr[j].Larger(arr[j],key,priority))
-               {
-                   arr[j + 1] = arr[j];
-                   j = j - 1;
-               }
-               arr[j + 1] = key;
-           }
-          //qDebug()<<arr;
-          return arr;
+        int j, val;
+
+          //iterate through entire list
+          for(int i = 1; i < data.size(); i++){
+             val = data[i];
+             j = i - 1;
+
+             while(j >= 0 && data[j] > val){
+                       data[j + 1] = data[j];
+                       j = j - 1;
+
+             }//end while
+             data[j + 1] = val;
+
+    }
     }
 
 };
+
+class Bubble: public Sort
+{
+  public:
+
+    void applysort(QVector<int> &arr)  {
+        bool swapp = true;
+             while(swapp){
+               swapp = false;
+               for (int i = 0; i < arr.size()-1; i++) {
+                   if (arr[i]>arr[i+1] ){
+                       arr[i] += arr[i+1];
+                       arr[i+1] = arr[i] - arr[i+1];
+                       arr[i] -=arr[i+1];
+                       swapp = true;
+
+                   }
+               }
+           }
+     }
+};
+
+
+
+
 
 class Heap: public Sort
 {
   public:
-    // To heapify a subtree rooted with node i which is
-    // an index in arr[]. n is size of heap
-    void heapify(int arr[], int n, int i)
+    void Swap(QVector<int>& vHeap, QVector<int>::size_type i, QVector<int>::size_type j)
     {
-        int largest = i; // Initialize largest as root
-        int l = 2*i + 1; // left = 2*i + 1
-        int r = 2*i + 2; // right = 2*i + 2
+        if(i == j)
+            return;
 
-        // If left child is larger than root
-        if (l < n && arr[l] > arr[largest])
-            largest = l;
+        int temp;
+        temp = vHeap[i];
+        vHeap[i] = vHeap[j];
+        vHeap[j] = temp;
 
-        // If right child is larger than largest so far
-        if (r < n && arr[r] > arr[largest])
-            largest = r;
 
-        // If largest is not root
-        if (largest != i)
+    }
+    void Sift(QVector<int>& vHeap, const QVector<int>::size_type heapSize, const QVector<int>::size_type siftNode)
+    {
+        QVector<int>::size_type i, j;
+
+        j = siftNode;
+        do
         {
-            int a=arr[i];
-            arr[i]=arr[largest];
-            arr[largest]=a;
+            i = j;
+            if(((2*i + 1) < heapSize) && vHeap[j] < vHeap[2*i + 1])
+                j = 2*i + 1;
+            if(((2*i + 2) < heapSize) && vHeap[j] < vHeap[2*i + 2])
+                j = 2*i + 2;
 
-            // Recursively heapify the affected sub-tree
-            heapify(arr, n, largest);
+            Swap(vHeap, i, j);
+        }
+        while(i != j);
+    }
+
+    void MakeInitialHeap(QVector<int>& vHeap)
+    {
+        for(int i = vHeap.size()- 1; i >= 0; --i)
+        {
+            Sift(vHeap, vHeap.size(), i);
         }
     }
-    QVector<Official> applysort(QVector<Official> arr, int priority)  {
-        int r[arr.size()];
-        for(int i=0; i<arr.size();i++){
-            r[i]=arr[i].yearsInMinistry;
-        }
-        // Build heap (rearrange array)
-        int n=arr.size();
-            for (int i = n / 2 - 1; i >= 0; i--)
-                heapify(r, n, i);
 
-            // One by one extract an element from heap
-            for (int i=n-1; i>=0; i--)
+    void applysort(QVector<int> &arr)
+    {
+        MakeInitialHeap(arr);
+            for(std::vector<int>::size_type i = arr.size()-1; i > 0; --i)
             {
-                // Move current root to end
+                Swap(arr, i, 0);
+                Sift(arr, i, 0);
 
-                int a=r[0];
-                r[0]=r[i];
-                r[i]=a;
 
-                // call max heapify on the reduced heap
-                heapify(r, i, 0);
             }
-
     }
 };
 
-class Merge: public Sort
-{
-    //void merge(int arr[], int l, int m, int r) =0;
-
-  public:
-    void merge(int arr[], int l, int m, int r)
-    {
-        int i, j, k;
-        int n1 = m - l + 1;
-        int n2 =  r - m;
-
-        /* create temp arrays */
-        int L[n1], R[n2];
-
-        /* Copy data to temp arrays L[] and R[] */
-        for (i = 0; i < n1; i++)
-            L[i] = arr[l + i];
-        for (j = 0; j < n2; j++)
-            R[j] = arr[m + 1+ j];
-
-        /* Merge the temp arrays back into arr[l..r]*/
-        i = 0; // Initial index of first subarray
-        j = 0; // Initial index of second subarray
-        k = l; // Initial index of merged subarray
-        while (i < n1 && j < n2)
-        {
-            if (L[i] <= R[j])
-            {
-                arr[k] = L[i];
-                i++;
-            }
-            else
-            {
-                arr[k] = R[j];
-                j++;
-            }
-            k++;
-        }
-
-        /* Copy the remaining elements of L[], if there
-           are any */
-        while (i < n1)
-        {
-            arr[k] = L[i];
-            i++;
-            k++;
-        }
-
-        /* Copy the remaining elements of R[], if there
-           are any */
-        while (j < n2)
-        {
-            arr[k] = R[j];
-            j++;
-            k++;
-        }
-    }
-
-    /* l is for left index and r is right index of the
-       sub-array of arr to be sorted */
-
-    void mergeSort(int arr[], int l, int r)
-    {
-        if (l < r)
-        {
-            // Same as (l+r)/2, but avoids overflow for
-            // large l and h
-            int m = l+(r-l)/2;
-
-            // Sort first and second halves
-            mergeSort(arr, l, m);
-            mergeSort(arr, m+1, r);
-
-            merge(arr, l, m, r);
-        }
-    }
-    QVector<Official> applysort(QVector<Official> arr, int priority)  {
-        int r[arr.size()];
-        for(int i=0; i<arr.size();i++){
-            r[i]=arr[i].yearsInMinistry;
-        }
-        mergeSort(r, arr[0].yearsInMinistry,arr[arr.size()-1].yearsInMinistry);
-    }
-};
-
-class Bucket: public Sort
+class Quick: public Sort
 {
   public:
-    QVector<Official> applysort(QVector<Official> arr, int priority)  {
-          /*      int n=arr.size();
-            // 1) Create n empty buckets
-                QVector<Official> b;
+    int partition(QVector<int> & a, int start, int end) {
+      int pivot = a[start];
+      int from_left = start+1;
+      int from_right = end;
+      int tmp;
 
-                // 2) Put array elements in different buckets
-                for (int i=0; i<n; i++)
-                {
-                   int bi = n*arr[i].yearsInMinistry; // Index in bucket
-                   b[bi].push_back(arr[i]);
-                }
+      while (from_left != from_right) {
+        if (a[from_left]  <= pivot) from_left++;
+        else {
+          while (( from_left != from_right)  && (pivot < a[from_right])) from_right--;
+          //cout << "swaping " << a[from_left] << " with "<< a[from_right] << endl;
+          tmp =  a[from_right];
+          a[from_right] = a[from_left];
+          a[from_left] = tmp;
 
-                // 3) Sort individual buckets
-                for (int i=0; i<n; i++)
-                   (b[i].begin(), b[i].end());
+        }
+      }
 
-                // 4) Concatenate all buckets into arr[]
-                int index = 0;
-                for (int i = 0; i < n; i++)
-                    for (int j = 0; j < b[i].size(); j++)
-                      arr[index++] = b[i][j];
-                return arr;*/
-        return arr;
+      if (a[from_left]>pivot) from_left--;
+      a[start] = a[from_left];
+      a[from_left] = pivot;
 
+      return (from_left);
+    }
+
+    /*
+      Recursive QS function. Base case is an empty vector.
+      Precondition:
+      Postcondition: The vector that was passed as parameter will be
+        sorted in ascending order.
+    */
+    void quickSort(QVector <int> & a, int p, int r) {
+      if (p < r) {
+        int q = partition(a, p, r);
+        quickSort(a, p, q - 1);
+        quickSort(a, q + 1, r);
+      }
+    }
+    void applysort(QVector<int> &arr)  {
+        quickSort(arr,0,arr.size()-1);
     }
 };
 
@@ -223,7 +176,6 @@ public:
 
 
 
-
 class InsertFactory: public SortFactory
 {
   public:
@@ -231,6 +183,14 @@ class InsertFactory: public SortFactory
         return new Insertion();
     }
 
+};
+
+class BubbleFactory: public SortFactory
+{
+  public:
+    Sort* createSort(){
+        return new Bubble();
+    }
 };
 
 class HeapFactory: public SortFactory
@@ -241,19 +201,11 @@ class HeapFactory: public SortFactory
     }
 };
 
-class MergeFactory: public SortFactory
+class QuickFactory: public SortFactory
 {
   public:
     Sort* createSort(){
-        return new Merge();
-    }
-};
-
-class BucketFactory: public SortFactory
-{
-  public:
-    Sort* createSort(){
-        return new Bucket();
+        return new Quick();
     }
 
 };
