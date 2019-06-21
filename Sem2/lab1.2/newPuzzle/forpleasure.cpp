@@ -14,6 +14,7 @@ forPleasure::forPleasure(QWidget *parent) :
     ui(new Ui::forPleasure)
 {
     ui->setupUi(this);
+    ui->spinBox_2->setRange(1,4);
     setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowTitleHint);
     Singleton::getInstance().IfLevels=false;
 
@@ -55,6 +56,7 @@ void forPleasure::on_pushButton_2_clicked()
     puzzle window;
     window.setModal(true);
     window.exec();
+    Singleton::getInstance().sort=ui->spinBox_2->value();
 }
 
 
@@ -75,3 +77,5 @@ void forPleasure::on_pushButton_3_clicked()
     wind.writeSettings();
 
 }
+
+

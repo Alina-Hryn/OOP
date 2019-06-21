@@ -26,6 +26,7 @@ public:
     void help();
     bool IfFinished(QVector<int> places);
     void showStep();
+    void NewSort(QVariant a);
 private slots:
      void updateTime();
     void pic_clicked();
@@ -41,6 +42,7 @@ private slots:
     void on_pushButton_5_clicked();
 
     void on_pushButton_4_clicked();
+
 
 private:
     Ui::puzzle *ui;

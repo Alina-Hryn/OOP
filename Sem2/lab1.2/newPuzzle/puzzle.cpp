@@ -30,11 +30,12 @@ puzzle::puzzle(QWidget *parent) :
     ui->setupUi(this);
 
 
-
     ui->label->setVisible(false);
     if(Singleton::getInstance().IfLevels==true){
         ui->pushButton_2->setVisible(false);
         ui->pushButton_3->setVisible(false);
+        ui->pushButton_4->setVisible(false);
+        ui->pushButton_5->setVisible(false);
     }
     setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowTitleHint);
     show();
@@ -89,9 +90,17 @@ puzzle::puzzle(QWidget *parent) :
                 }
         }
 
-
+        if(!Singleton::getInstance().IfLevels){
         Singleton::getInstance().stepsForSorting.clear();
-        SortFactory* sortFactory= new BubbleFactory();
+        SortFactory* sortFactory= new QuickFactory();
+        switch (Singleton::getInstance().sort) {
+
+            case 2:sortFactory=new HeapFactory();
+            break;
+            case 3:sortFactory=new BubbleFactory();
+            break;
+            case 4:sortFactory=new InsertFactory();
+        }
         QVector<int> array;
         for(int i=0;i<array.size();i++){
             array[i]=i;
@@ -101,6 +110,7 @@ puzzle::puzzle(QWidget *parent) :
         Sort* s=sortFactory->createSort();
         s->applysort(places);
         Singleton::getInstance().step=0;
+        }
 
 }
 
@@ -375,3 +385,5 @@ void puzzle::on_pushButton_4_clicked()
     showStep();
 
 }
+
+

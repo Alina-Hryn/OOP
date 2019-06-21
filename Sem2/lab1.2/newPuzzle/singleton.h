@@ -27,6 +27,7 @@ public:
     int NumberOfStars;
     int sort;
     int step;
+
     QVector<QVector<int>>stepsForSorting;
     QVector <QString> visitedLevels;
 
